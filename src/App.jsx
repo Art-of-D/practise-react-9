@@ -8,11 +8,16 @@ function App() {
   const addUser = (user) => {
     setUsers([...users, user]);
   };
+
+  const removeUser = (id) => {
+    const updatedUsers = users.filter((person) => person.id !== id);
+    setUsers(updatedUsers);
+  };
   return (
     <div className="container">
       <h2>User Book</h2>
       <Input addUser={addUser} />
-      <List people={users} />
+      <List people={users} removeUser={removeUser} />
     </div>
   );
 }

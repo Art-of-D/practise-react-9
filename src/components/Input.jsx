@@ -1,12 +1,20 @@
 import { useState } from "react";
 const Input = ({ addUser }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [user, setUser] = useState({ name: "", email: "" });
+
+  const handleInput = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (user.name === "" || user.email === "") {
+      return;
+    }
     const fakeId = Date.now();
-    addUser({ id: fakeId, name, email });
+    addUser({ id: fakeId, name: user.name, email: user.email });
+    setUser({ name: "", email: "" });
   };
   return (
     <form className="form" onSubmit={handleSubmit}>
@@ -18,9 +26,10 @@ const Input = ({ addUser }) => {
         <input
           type="text"
           className="form-input"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
           id="name"
+          value={user.name}
+          name="name"
+          onChange={handleInput}
         />
       </div>
       <div className="form-row">
@@ -31,8 +40,9 @@ const Input = ({ addUser }) => {
           type="email"
           className="form-input"
           id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={user.email}
+          name="email"
+          onChange={handleInput}
         />
       </div>
       <button type="submit" className="btn btn-block">
