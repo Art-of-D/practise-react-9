@@ -1,20 +1,17 @@
-import { useState } from "react";
 const Input = ({ addUser }) => {
-  const [user, setUser] = useState({ name: "", email: "" });
-
-  const handleInput = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const data = new FormData(e.currentTarget);
+    const user = Object.fromEntries(data);
 
     if (user.name === "" || user.email === "") {
       return;
     }
+
     const fakeId = Date.now();
     addUser({ id: fakeId, name: user.name, email: user.email });
-    setUser({ name: "", email: "" });
+    e.currentTarget.reset();
   };
   return (
     <form className="form" onSubmit={handleSubmit}>
@@ -23,27 +20,13 @@ const Input = ({ addUser }) => {
         <label htmlFor="name" className="form-label">
           name
         </label>
-        <input
-          type="text"
-          className="form-input"
-          id="name"
-          value={user.name}
-          name="name"
-          onChange={handleInput}
-        />
+        <input type="text" className="form-input" id="name" name="name" />
       </div>
       <div className="form-row">
         <label htmlFor="email" className="form-label">
           Email
         </label>
-        <input
-          type="email"
-          className="form-input"
-          id="email"
-          value={user.email}
-          name="email"
-          onChange={handleInput}
-        />
+        <input type="email" className="form-input" id="email" name="email" />
       </div>
       <button type="submit" className="btn btn-block">
         add user
