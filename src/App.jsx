@@ -1,6 +1,7 @@
 import { useState } from "react";
 import List from "./components/List";
 import Input from "./components/Input";
+import Toggle from "./components/Toggle";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -18,6 +19,7 @@ function App() {
       <h2>User Book</h2>
       <Input addUser={addUser} />
       <List people={users} removeUser={removeUser} />
+      <Toggle />
     </div>
   );
 }

@@ -15,6 +15,7 @@ const Person = ({
     e.preventDefault();
     removeUser(id);
   };
+
   return (
     <div>
       <img src={img} alt={name} style={{ width: "50px" }} />
