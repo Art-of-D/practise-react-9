@@ -2,6 +2,7 @@ import { useState } from "react";
 import List from "./components/List";
 import Input from "./components/Input";
 import Toggle from "./components/Toggle";
+import Teacher from "./components/Teacher";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -20,6 +21,7 @@ function App() {
       <Input addUser={addUser} />
       <List people={users} removeUser={removeUser} />
       <Toggle />
+      <Teacher />
     </div>
   );
 }
